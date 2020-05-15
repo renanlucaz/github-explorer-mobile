@@ -22,7 +22,10 @@ import {
 export default class User extends Component {
     static propTypes = {
         route: PropTypes.shape({
-            params: PropTypes.func,
+            params: PropTypes.object,
+        }).isRequired,
+        navigation: PropTypes.shape({
+            navigate: PropTypes.func,
         }).isRequired,
     };
 
@@ -60,6 +63,12 @@ export default class User extends Component {
         this.load(nextPage);
     };
 
+    handleNavigate = (repository) => {
+        const { navigation } = this.props;
+
+        navigation.navigate('Repository', { repository });
+    };
+
     render() {
         const { stars, loading } = this.state;
 
@@ -87,7 +96,9 @@ export default class User extends Component {
                         data={stars}
                         keyExtractor={(star) => String(star.id)}
                         renderItem={({ item }) => (
-                            <Starred>
+                            <Starred
+                                onTouchStart={() => this.handleNavigate(item)}
+                            >
                                 <OwnerAvatar
                                     source={{ uri: item.owner.avatar_url }}
                                 />

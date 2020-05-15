@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Main from './pages/Main';
 import User from './pages/User';
+import Repository from './pages/Repository';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,18 @@ function Routes() {
                 })}
                 name="User"
                 component={User}
+            />
+            <Stack.Screen
+                options={{
+                    title: 'Repository',
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                        backgroundColor: '#7159c1',
+                    },
+                    headerTintColor: '#fff',
+                }}
+                name="Repository"
+                component={Repository}
             />
         </Stack.Navigator>
     );
